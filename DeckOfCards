@@ -1,15 +1,21 @@
+# Brand new deck
+
 import requests
-import json
+import responseJson
 import pprint
 
-# Start game
+url = "https://deckofcardsapi.com/api/deck/new/"
 
-answer = input("Are you ready to play a new game of BlackJack? (yes/no)")
+payload={}
+headers = {
+    'Accept': 'application/json'
+}
 
-if answer == "yes":
-    print("Great, let's continue. ")
-else:
-    print("OK, let's stop here. ")
+response = requests.request("GET", url, headers=headers, data=payload)
+
+newDeckjson = response.json()
+
+print(newDeckjson)
 
 # Shuffle the deck of cards
 
@@ -26,17 +32,14 @@ response = requests.request("GET", url, headers=headers, data=payload)
 
 deckJson = response.json()
 
-newid = deckJson['deck_id']
+id = deckJson['deck_id']
+print('Your deck ID is ')
 
-print('Your deck ID is ' + str(newid))
+
 
 # Draw cards
-draw = input("Draw? (yes/no) ")
 
-if draw == "yes":
-    print("Here's your cards! ")
-else:
-    print("Ok, your locked in! ")
+import requests
 
 url = "https://deckofcardsapi.com/api/deck/di5y7wmjv4bf/draw/?count=2"
 
